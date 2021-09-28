@@ -20,7 +20,7 @@ Nama Barang : Dumbell<br>
 
 ![Kiri atas](https://github.com/cg2021d/menggambar-primitif-osd0081/blob/main/images/image3.jpeg)
 
-Nama Barang : Dualshock 2<br>
+<!-- Nama Barang : Dualshock 2<br>
 ## Depan Atas
 
 ![depat atas](https://user-images.githubusercontent.com/74223938/135046340-a4ddfb4a-5117-450c-92ac-0acfa1e0ef43.JPG)
@@ -36,4 +36,4 @@ Nama Barang : Dualshock 2<br>
 
 ## Kiri Atas
 
-![Kiri atas](https://user-images.githubusercontent.com/74223938/135046382-c20ee1b8-2a24-4692-8b8e-8afeb8d8b163.JPG)
+![Kiri atas](https://user-images.githubusercontent.com/74223938/135046382-c20ee1b8-2a24-4692-8b8e-8afeb8d8b163.JPG) -->
