@@ -4,6 +4,11 @@
 Nama : Muhammad Rafki Mardi<br>
 NRP : 05111940000054<br>
 Nama Barang : Dumbell<br>
+
+## Hasil Implementasi
+
+![Screenshot 2021-10-06 053845](https://user-images.githubusercontent.com/74223938/136112457-f7ab4daa-0110-408c-91d0-c146480d755a.png)
+
 ## Depan Atas
 
 ![depat atas](https://github.com/cg2021d/menggambar-primitif-osd0081/blob/main/images/image0.jpeg)
