@@ -7,7 +7,7 @@ Nama Barang : Dumbell<br>
 
 ## Hasil Implementasi
 
-https://user-images.githubusercontent.com/74223938/136431827-bae51fa3-aa9f-405a-8a72-6044afaffaf4.mp4
+https://user-images.githubusercontent.com/74223938/136432178-4ab58c6b-5409-4e3d-9f35-2d00788ee16b.mp4
 
 ## Depan Atas
 
