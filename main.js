@@ -1,8 +1,39 @@
-function main() {
-    var canvas = document.getElementById('my_Canvas');
-    gl = canvas.getContext('webgl'); 
+var canvas = document.getElementById('my_Canvas');
 
-    var vertices = [0.500000000000000, 0.273702387603100, 0.0 /*pusat atas*/
+function main() {
+    gl = canvas.getContext('webgl'); 
+    // var programInfo = webglUtils.createProgramInfo();
+    // left();
+    
+    let top = 0.397276812777000;
+    let bot = -0.315626122322000;
+    let speed = 0.0054;
+    var dy = 0;
+    
+    requestAnimationFrame(draw);
+
+    function draw() {
+        if(top>1.01 && speed >0){
+            speed *=-1;
+        }else if (bot<-1.0 && speed < 0){
+            speed *=-1;
+        }
+        dy += speed;
+        top += speed;
+        bot +=speed;
+        gl.clearColor(1.0, 0.8, 0.2, 1.0);
+        gl.enable(gl.DEPTH_TEST);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.viewport(0,0,canvas.width,canvas.height);
+        right(dy);
+        left();
+        requestAnimationFrame(draw);
+    }
+}
+
+function right(dy) {  
+    var vertices = [
+                    0.500000000000000, 0.273702387603100, 0.0 /*pusat atas*/
                     ,0.375941313287600, 0.328401599353000, 0.0 
                     ,0.391377904083700, 0.348915139816700, 0.0 
                     ,0.414086105609800, 0.369361696309500, 0.0 
@@ -46,7 +77,8 @@ function main() {
                     ,0.347781173293600, -0.0496648324434000, 0.0 
                     ,0.369694190060100, -0.0301762752765000, 0.0 
                     ,0.395180253707300, -0.0156695622288000, 0.0 
-                    ,0.413718979957700, -0.00905884904270000, 0.0] /*bawah kiri*/              
+                    ,0.413718979957700, -0.00905884904270000, 0.0
+    ]; /*bawah kiri*/              
 
     var indices = [
         0,1,2
@@ -146,47 +178,162 @@ function main() {
         0);
     gl.enableVertexAttribArray(coord);
 
-    gl.clearColor(1.0, 0.8, 0.2, 0.9);
-    gl.enable(gl.DEPTH_TEST);
-    gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.viewport(0,0,canvas.width,canvas.height);
-    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
-
-    let top = 0.397276812777000;
-    let bot = -0.315626122322000;
-    let speed = 0.054;
-
-    var primitive = gl.TRIANGLES;
+    // let top = 0.397276812777000;
+    // let bot = -0.315626122322000;
+    // let speed = 0.0054;
 
     var dx = 0;
-    var dy = 0;
+    // var dy = 0;
     var dz = 0;
     var uDx = gl.getUniformLocation(shaderProgram, 'dx');
     var uDy = gl.getUniformLocation(shaderProgram, 'dy');
     var uDz = gl.getUniformLocation(shaderProgram, 'dz');
 
-    function render(){
-        if(top>1.0 && speed >0){
-            speed *=-1;
-        }else if (bot<-1.0 && speed < 0){
-            speed *=-1;
-        }
-            console.log(speed);
-            dy += speed;
-            top += speed;
-            bot +=speed;
-
+    // function render(){
+    //     if(top>1.0 && speed >0){
+    //         speed *=-1;
+    //     }else if (bot<-1.0 && speed < 0){
+    //         speed *=-1;
+    //     }
+    //     dy += speed;
+    //     top += speed;
+    //     bot +=speed;
+        
         gl.uniform1f(uDx, dx);
         gl.uniform1f(uDy, dy);
-        gl.uniform1f(uDz, dz);  
-        gl.clearColor(1.0, 0.8, 0.2, 1);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-
-        gl.drawElements(primitive, indices.length, gl.UNSIGNED_SHORT,0);
-
-        requestAnimationFrame(render);
-    }
-    requestAnimationFrame(render);
-
+        gl.uniform1f(uDz, dz);
+        
+        gl.drawElements( gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
+    //     requestAnimationFrame(render);
+    // }
+    // requestAnimationFrame(render);
+    // gl.drawElements( gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
 }
 
+function left() {
+    var vertices =[
+        -0.776685037100000, 0.00000000000000, 0.0 //pusat kiri
+        ,-0.871705245200000, 0.00000000000000, 0.0
+        ,-0.865767833700000, 0.0564906969000000, 0.0
+        ,-0.848215092500000, 0.110512479300000, 0.0
+        ,-0.825843698900000, 0.151057485400000, 0.0
+        ,-0.819814160800000, 0.159704336100000, 0.0
+        ,-0.709732107900000, 0.160577357400000, 0.0
+        ,-0.705642416000000, 0.151057485400000, 0.0
+        ,-0.684227542200000, 0.0820823755000000, 0.0
+        ,-0.675600336900000, 0.0748417188000000, 0.0
+        ,-0.675600336900000, -0.0748417188000000, 0.0
+        ,-0.684227542200000, -0.0820823755000000, 0.0
+        ,-0.705642416000000, -0.151057485400000, 0.0
+        ,-0.709732107900000, -0.160577357400000, 0.0
+        ,-0.819814160800000, -0.159704336100000, 0.0
+        ,-0.825843698900000, -0.151057485400000, 0.0
+        ,-0.848215092500000, -0.110512479300000, 0.0
+        ,-0.865767833700000, -0.0564906969000000, 0.0
+        ,-0.208346925000000, 0.00000000000000, 0.0 //pusat kanan
+        ,-0.309431625200000, 0.0748417188000000, 0.0
+        ,-0.300804419900000, 0.0820823755000000, 0.0
+        ,-0.279389546100000, 0.151057485400000, 0.0
+        ,-0.275299854200000, 0.160577357400000, 0.0
+        ,-0.165217801300000, 0.159704336100000, 0.0
+        ,-0.159188263200000, 0.151057485400000, 0.0
+        ,-0.136816869600000, 0.110512479300000, 0.0
+        ,-0.119264128400000, 0.0564906969000000, 0.0
+        ,-0.113326716900000, 0.00000000000000, 0.0
+        ,-0.119264128400000, -0.0564906969000000, 0.0
+        ,-0.136816869600000, -0.110512479300000, 0.0
+        ,-0.159188263200000, -0.151057485400000, 0.0
+        ,-0.165217801300000, -0.159704336100000, 0.0
+        ,-0.275299854200000, -0.160577357400000, 0.0
+        ,-0.279389546100000, -0.151057485400000, 0.0
+        ,-0.300804419900000, -0.0820823755000000, 0.0
+        ,-0.309431625200000, -0.0748417188000000, 0.0
+    ]
+
+    var indices = [
+        0,1,2
+        ,0,2,3
+        ,0,3,4
+        ,0,4,5
+        ,0,5,6
+        ,0,6,7
+        ,0,7,8
+        ,0,8,9
+        ,0,9,10
+        ,0,10,11
+        ,0,11,12
+        ,0,12,13
+        ,0,13,14
+        ,0,14,15
+        ,0,15,16
+        ,0,16,17
+        ,0,17,1
+        ,18,19,20
+        ,18,20,21
+        ,18,21,22
+        ,18,22,23
+        ,18,23,24
+        ,18,24,25
+        ,18,25,26
+        ,18,26,27
+        ,18,27,28
+        ,18,28,29
+        ,18,29,30
+        ,18,30,31
+        ,18,31,32
+        ,18,32,33
+        ,18,33,34
+        ,18,34,35
+        ,18,19,35
+        ,19,10,9
+        ,19,35,10
+    ];
+
+    var vertex_buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ARRAY_BUFFER, null);
+
+    var Index_Buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(indices), gl.STATIC_DRAW);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+
+    var vertCode =
+                'attribute vec3 coordinates;' +
+                'void main(void) {' +
+                ' gl_Position = vec4(coordinates, 1.0);' +
+                '}';
+
+    var vertShader = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vertShader, vertCode);
+    gl.compileShader(vertShader);
+
+    var fragCode =
+    'void main(void) {' +
+    ' gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);' +
+    '}';
+
+    var fragShader = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fragShader, fragCode);
+    gl.compileShader(fragShader);
+
+    var shaderProgram = gl.createProgram();
+    gl.attachShader(shaderProgram, vertShader);
+    gl.attachShader(shaderProgram, fragShader);
+    gl.linkProgram(shaderProgram);
+
+    gl.useProgram(shaderProgram);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, vertex_buffer);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, Index_Buffer); 
+    var coord = gl.getAttribLocation(shaderProgram, "coordinates");
+    gl.vertexAttribPointer(coord, 2, 
+        gl.FLOAT, 
+        false, 
+        3*Float32Array.BYTES_PER_ELEMENT, 
+        0);
+    gl.enableVertexAttribArray(coord);
+    gl.drawElements(gl.TRIANGLES, indices.length, gl.UNSIGNED_SHORT,0);
+    
+}
