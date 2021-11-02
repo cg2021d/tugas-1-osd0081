@@ -10,6 +10,12 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
 const scene = new THREE.Scene();
+// {
+//     const color = 0xFFFFFF;
+//     const density = 0.1;
+//     scene.fog = new THREE.FogExp2(color, density);
+// }
+
 
 const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
 let controls = new OrbitControls(camera, renderer.domElement);
@@ -17,7 +23,14 @@ camera.position.set( 0, 20, 100 );
 
 controls.update();
 
-scene.background = new THREE.Color(0xababab);
+// scene.background = new THREE.Color(0xababab);
+{
+    const near = 80;
+    const far = 100;
+    const color = 'lightblue';
+    scene.fog = new THREE.Fog(color, near, far);
+    scene.background = new THREE.Color(0xababab);
+  }
 
 let dirLight = function(){
     const color = 0xFFFFFF;
