@@ -5,7 +5,11 @@ Nama : Muhammad Rafki Mardi<br>
 NRP : 05111940000054<br>
 Nama Barang : Dumbell<br>
 
-## Hasil Implementasi
+## Hasil Implementasi ThreeJS
+
+https://user-images.githubusercontent.com/74223938/136917101-f1b37719-5e70-487f-9292-3bf1e5022f60.mp4
+
+## Hasil Implementasi WebGL
 
 https://user-images.githubusercontent.com/74223938/136432178-4ab58c6b-5409-4e3d-9f35-2d00788ee16b.mp4
 
