@@ -4,20 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tugas 2</title>
     <script type="module" src="./main.js"></script>
-    <style>
-        #info {
-            position: absolute;
-            top: 10px;
-            width: 100%;
-            text-align: center;
-            z-index: 100;
-            display:block;
-        }
-    </style>
 </head>
-<div id="info">Pecahkan balon yang memiliki warna sama<br>jika jumlah balon sudah 30, permainan berakhir.</div>
-<body style="padding:0px;margin:0px;overflow: hidden;">
+<body >
+    <select name="lighting" id="light">
+        <option value="dir">Directional Light</option>
+        <option value="ambi">Ambient Light</option>
+        <option value="hem">Hemisphere Light</option>
+        <option value="poi">Point Light</option>
+        <option value="spo">Spot Lights</option>
+    </select>
+    <canvas id="canvas"></canvas>
 </body>
 </html>
