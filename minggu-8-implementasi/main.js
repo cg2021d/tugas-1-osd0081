@@ -1,5 +1,6 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.118.1/build/three.module.js';
-import {FBXLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/FBXLoader.js';
+import {RGBELoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/RGBELoader.js';
+import {FlakesTexture} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/textures/FlakesTexture.js';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js';
 import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/controls/OrbitControls.js';
 
@@ -96,7 +97,7 @@ class BasicWorldDemo{
             this._camera, this._threejs.domElement);
         controls.target.set(0, -1, 0);
         controls.screenSpacePanning = false;
-        controls.enablePan = false;
+        // controls.enablePan = false;
         controls.update();
 
         this._camera.lookAt(0, -1, 0);
@@ -129,15 +130,38 @@ class BasicWorldDemo{
         plane.rotation.x = -Math.PI / 2;
         this._scene.add(plane);
 
-        //add test box object
-        box = new THREE.Mesh(
-            new THREE.CubeGeometry(4, 10, 4),
-            new THREE.MeshStandardMaterial({
-            color: 0x00F0FF,
-        }));
-        // box.position.set(10, 5, 10);
-        // box.castShadow = true;
-        // box.receiveShadow = true;
+        // this._threejs.outputEncoding = THREE.sRGBEncoding;
+        // this._threejs.toneMapping = THREE.ACESFilmicToneMapping;
+        // this._threejs.toneMappingExposure =1.25;
+
+        let envmaploader =  new THREE.PMREMGenerator(this._threejs);
+
+        new RGBELoader().setPath('./resources/').load('abandoned_tank_farm_05_4k.hdr',hdrmap=> {
+            let envmap =envmaploader.fromCubemap(hdrmap);
+            let ballText = new THREE.CanvasTexture(new FlakesTexture());
+            ballText.wrapS = THREE.RepeatWrapping;
+            ballText.wrapT = THREE.RepeatWrapping;
+            ballText.repeat.x = 10;
+            ballText.repeat.y = 6;
+    
+            const ballMaterial = {
+                clearcoat:1.0,
+                clearcoatRoughness:0.1,
+                metalness:0.9,
+                roughness:0.5,
+                color:0x8418ca,
+                normalMap:ballText,
+                normalScale: new THREE.Vector2(0.15,0.15),
+                envMap:envmap.texture
+            }
+    
+            let ballGeo = new THREE.SphereGeometry(20,64,64);
+            let ballMat = new THREE.MeshPhysicalMaterial(ballMaterial);
+            let ballMesh = new THREE.Mesh(ballGeo,ballMat);
+            ballMesh.position.set(0,50,0);
+            this._scene.add(ballMesh);
+        });      
+        
 
         box = new THREE.CubeGeometry(4,10,4);
         let boxMat = new THREE.MeshPhysicalMaterial({
