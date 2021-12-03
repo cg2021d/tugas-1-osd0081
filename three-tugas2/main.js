@@ -88,6 +88,7 @@ function cekInter() {
     console.log(cek[1].material.color);
     if(cek[0].material.color.equals(cek[1].material.color)){
         score+=1;
+        tick+=5;
         scene.remove(cek[0]);
         scene.remove(cek[1]);
         cek=[];
@@ -118,11 +119,11 @@ function genObj() {
         document.getElementById("info").innerHTML = 
             "Pecahkan balon yang memiliki warna sama<br>jika jumlah balon sudah 30, permainan berakhir.<br>Balon: "
                 +amount+"/30.<br>Score "+score+".";
-        n+=1;
+        n+=2;
     // }
     }
     if(50 -n>10)
-        tick = 50 - n;
+        tick = tick + 50 - n;
     else
         tick = 10;
 }
