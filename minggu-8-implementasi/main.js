@@ -4,20 +4,7 @@ import {FlakesTexture} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/loaders/GLTFLoader.js';
 import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.118.1/examples/jsm/controls/OrbitControls.js';
 
-let box,sphere;
-let makeSphere;
-let directionKey;
-let check, dash, score = 0;
-
-// let onKeyDown = function(e) {
-//     console.log(e);
-//     directionKey = e.keyCode;
-// };
-
-// let randomInRange = function(from, to) {
-//     let x = Math.random() * (to - from);
-//     return x + from;
-// };
+let box;
 
 class BasicWorldDemo{
     constructor(){
@@ -181,10 +168,6 @@ class BasicWorldDemo{
 
         this._scene.add(boxMesh);
         
-        // makeSphere(this._scene); 
-
-        //request animation frame function aka render function
-        // document.addEventListener("keydown", onKeyDown, false);
         this._LoadModel();
         this._RAF(this._scene);
     }
@@ -217,60 +200,6 @@ class BasicWorldDemo{
         });
     }
 }
-
-// makeSphere = function(_scene){
-//     const geometry = new THREE.SphereGeometry( 2, 32, 16 );
-//     const material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-//     sphere = new THREE.Mesh( geometry, material );
-//     sphere.position.x = Math.round(randomInRange(-48, 48));
-//     sphere.position.z = Math.round(randomInRange(-48, 48));
-//     sphere.position.y = 2;
-//     sphere.castShadow = true;
-//     _scene.add( sphere );
-// }
-
-// dash = function () {
-//     if(directionKey == 65){
-//         if(box.position.x == -48)
-//             return;
-//         else
-//             box.position.x-=1;
-//     } 
-//     else if(directionKey == 68){
-//         if(box.position.x == 48)
-//             return;
-//         else
-//             box.position.x+=1;
-//     }
-//     else if(directionKey == 87){
-//         if(box.position.z == -48)
-//             return;
-//         else
-//             box.position.z-=1;
-//     }
-//     else if(directionKey == 83){
-//         if(box.position.z == 48)
-//             return;
-//         else
-//             box.position.z+=1;
-//     }
-//     else
-//         return;
-// }
-
-// check = function(_scene){
-//     if((sphere.position.x-2<=box.position.x && sphere.position.x+2>=box.position.x)&&(sphere.position.z-2<=box.position.z && sphere.position.z+2>=box.position.z)){
-//         score +=1; 
-//         document.getElementById("score").innerHTML = score;
-//         if (score == 10){
-//             alert("You Win!");
-//             location.reload();
-//         }
-//         _scene.remove(sphere);
-//         makeSphere(_scene);
-//     }
-// };
-
 let _APP = null;
 
 window.addEventListener('DOMContentLoaded', () => {
