@@ -193,8 +193,6 @@ class BasicWorldDemo{
 
     _RAF(_scene){
         requestAnimationFrame(()=>{
-            // dash();
-            // check(_scene);
             this._threejs.render(this._scene,this._camera);
             this._RAF(_scene);
         });
